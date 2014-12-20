@@ -1,0 +1,10 @@
+[Unit]
+Description=Journal 2 ban
+Requires=systemd-journald.service
+After=sshd.service
+
+[Service]
+ExecStart=/usr/local/sbin/journal2ban.py
+
+[Install]
+WantedBy=multi-user.target

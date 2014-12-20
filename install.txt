@@ -1,0 +1,6 @@
+copy /usr/local/sbin/ssh-block.sh 
+copy /usr/lib/systemd/system/journal2ban.service
+add /usr/local/sbin/ssh-block.sh to /etc/rc.local
+run cmd /usr/local/sbin/ssh-block.sh
+add iptables rule 
+ INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ssh-block
