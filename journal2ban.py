@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import json
 import subprocess
@@ -11,13 +11,11 @@ def check_msg(msg):
 	print msg
 	ipv4 = None
 	ip = None
-	# User root from 194.100.34.1 not allowed because none of user's groups are listed in AllowGroups
-	if "not allowed because none of user" in msg:
+	# User root from 61.174.50.178 not allowed because none of user's groups are listed in AllowGroups
+	# Failed password for invalid user root from 61.174.50.178 port 35823 ssh2
+	# sshd[11229]: Invalid user eaguilar from 62.36.240.118
+	if "not allowed because none of user" in msg or "for invalid user" in msg or "Invalid user" in msg:
 		match = re.search(r"from ([0-9a-f.:]+)", msg)
-		if not match == None:
-			ip = match.group(1)
-	elif "authentication failure" in msg:
-		match = re.search(r"rhost=([0-9a-f.:]+)", msg)
 		if not match == None:
 			ip = match.group(1)
 
